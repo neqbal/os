@@ -1,0 +1,3 @@
+riscv64-unknown-elf-gcc -I /usr/riscv64-linux-gnu/include -nostdlib
+
+qemu-riscv64 
