@@ -1,3 +1,8 @@
 *.o
 *.elf
+*.i
+*.out
+*.dtb
+*.dts
+temp
 hgvhjv
