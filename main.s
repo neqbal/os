@@ -7,7 +7,7 @@
 	.section	.rodata
 	.align	3
 .LC0:
-	.string	"Hello, World!\n"
+	.string	"Woo\n"
 	.text
 	.align	1
 	.globl	main
@@ -19,6 +19,7 @@ main:
 	addi	s0,sp,16
 	lla	a0,.LC0
 	call	uart_put_char
+	call	uart_get_char
 	li	a5,0
 	mv	a0,a5
 	ld	ra,8(sp)
