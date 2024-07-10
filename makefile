@@ -1,14 +1,12 @@
-start: kernel.elf
-	qemu-system-riscv64 -machine virt -bios none -kernel kernel.elf -serial mon:stdio
+start: riscv.out
+	qemu-system-riscv64 -machine virt -bios none -m 128M -gdb tcp::1234 -S -kernel riscv.out -serial stdio
 
-kernel.elf: kernel.o
-	riscv64-unknown-elf-gcc -T linker.ld -nostdlib kernel.o entry.o -o kernel.elf
+riscv.out:
+	riscv64-unknown-elf-gcc -g -mcmodel=medany -ffreestanding -O0 -Wl,--gc-sections \
+    -nostartfiles -nostdlib -nodefaultlibs -Wl,-T,riscv64-virt.ld \
+    crt0.s main.c ns16550a.s -o riscv.out
 
-kernel.o: entry.o
-	riscv64-unknown-elf-gcc -Wall -Wextra -c -mcmodel=medany kernel.c -o kernel.o -ffreestanding
 
-entry.o:
-	riscv64-unknown-elf-as -c entry.S -o entry.o
 
 
 
